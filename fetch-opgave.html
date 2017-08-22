@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+</head>
+<div id="content"></div>
+
+<body>
+    <script>
+        fetch('https://swapi.co/api/people/')
+            .then((response) => {
+                if (response.status == 200) {
+                    return response.json();
+                }
+                else {
+                   throw new Error("fejl");
+                }
+            })
+            .then((json) => {
+
+                var content = document.getElementById('content');
+                console.log(json.results);
+                json.results.forEach(function (element, tal) {
+                    content.innerHTML += '<h1> name: ' + json.results[tal].name + '</h1>';
+                    content.innerHTML += '<div> height: ' + json.results[tal].height + '</div>';
+                    content.innerHTML += "<div> mass: " + json.results[tal].mass + "</div>";
+                });
+            })
+            .catch((error) => {
+                console.log(error);
+            })
+    </script>
+</body>
+
+</html>
